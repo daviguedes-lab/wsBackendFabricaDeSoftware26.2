@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block title %}Excluir Categoria - Pizzaria{% endblock %}
+
+{% block content %}
+
+<div class="form-card">
+
+    <h2>⚠️ Excluir Categoria</h2>
+
+    <p>
+        Tem certeza que deseja excluir a categoria
+        <strong>{{ categoria.nome }}</strong>?
+    </p>
+
+    {% if categoria.pizzas.count > 0 %}
+
+        <p style="color: #c0392b; font-weight: bold;">
+            ⚠️ Atenção: esta categoria possui
+            {{ categoria.pizzas.count }} pizza(s).
+        </p>
+
+        <p>
+            Ao excluir a categoria, todas as pizzas pertencentes
+            a ela também serão excluídas.
+        </p>
+
+    {% endif %}
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+        <button type="submit" class="btn btn-danger">
+            🗑️ Sim, excluir
+        </button>
+
+        <a
+            href="{% url 'lista_categorias' %}"
+            class="btn btn-secondary"
+        >
+            ↩️ Cancelar
+        </a>
+
+    </form>
+
+</div>
+
+{% endblock %}

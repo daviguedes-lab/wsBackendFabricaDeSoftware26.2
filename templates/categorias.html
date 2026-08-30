@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block title %}Categorias - Pizzaria{% endblock %}
+
+{% block content %}
+
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px;">
+
+    <h2 class="page-title">🏷️ Categorias</h2>
+
+    <a href="{% url 'nova_categoria' %}" class="btn btn-primary">
+        ➕ Nova Categoria
+    </a>
+
+</div>
+
+{% if categorias %}
+
+<div class="pizza-grid">
+
+    {% for categoria in categorias %}
+
+    <div class="pizza-card">
+
+        <div class="pizza-content">
+
+            <h3>🏷️ {{ categoria.nome }}</h3>
+
+            <p class="pizza-description">
+                {{ categoria.descricao }}
+            </p>
+
+            <p>
+                🍕 {{ categoria.pizzas.count }} pizza(s)
+            </p>
+
+            <div class="actions">
+
+                <a
+                    href="{% url 'editar_categoria' categoria.id %}"
+                    class="btn btn-secondary"
+                >
+                    ✏️ Editar
+                </a>
+
+                <a
+                    href="{% url 'excluir_categoria' categoria.id %}"
+                    class="btn btn-danger"
+                >
+                    🗑️ Excluir
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    {% endfor %}
+
+</div>
+
+{% else %}
+
+<div class="form-card">
+
+    <h3>📂 Nenhuma categoria cadastrada</h3>
+
+    <p>Comece criando sua primeira categoria.</p>
+
+    <a href="{% url 'nova_categoria' %}" class="btn btn-primary">
+        ➕ Criar Categoria
+    </a>
+
+</div>
+
+{% endif %}
+
+{% endblock %}
