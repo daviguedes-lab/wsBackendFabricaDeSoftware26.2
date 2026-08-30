@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 
-from produtos.views import CategoriaViewSet, PizzaViewSet
+from produtos.views import CategoriaViewSet, PizzaViewSet, consultar_cep
 
 
 router = DefaultRouter()
@@ -30,4 +30,5 @@ router.register(r'pizzas', PizzaViewSet)
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
+    path('api/consultar-cep/<str:cep>/', consultar_cep),
 ]
