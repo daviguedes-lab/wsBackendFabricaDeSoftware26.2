@@ -1,0 +1,127 @@
+```html
+{% extends 'base.html' %}
+
+{% block title %}Consultar CEP - Pizzaria{% endblock %}
+
+{% block content %}
+
+<div style="max-width: 650px; margin: 0 auto;">
+
+    <div style="text-align: center; margin-bottom: 30px;">
+
+        <div style="font-size: 55px;">
+            📍
+        </div>
+
+        <h2>
+            Consultar CEP
+        </h2>
+
+        <p style="color: #777;">
+            Digite um CEP para consultar o endereço.
+        </p>
+
+    </div>
+
+
+    <div class="card">
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+            <label for="cep">
+                CEP
+            </label>
+
+            <input
+                type="text"
+                id="cep"
+                name="cep"
+                placeholder="Ex: 58000-000"
+                maxlength="9"
+                required
+            >
+
+            <button
+                type="submit"
+                class="btn btn-primary"
+            >
+                🔍 Consultar CEP
+            </button>
+
+        </form>
+
+
+        {% if erro %}
+
+            <div style="
+                margin-top: 20px;
+                padding: 15px;
+                background: #ffe5e5;
+                color: #b00020;
+                border-radius: 8px;
+            ">
+                ❌ {{ erro }}
+            </div>
+
+        {% endif %}
+
+
+        {% if dados %}
+
+            <div style="
+                margin-top: 30px;
+                padding: 20px;
+                background: #f7f7f7;
+                border-radius: 10px;
+            ">
+
+                <h3>
+                    📍 Endereço encontrado
+                </h3>
+
+                <p>
+                    <strong>CEP:</strong>
+                    {{ dados.cep }}
+                </p>
+
+                <p>
+                    <strong>Logradouro:</strong>
+                    {{ dados.logradouro }}
+                </p>
+
+                <p>
+                    <strong>Bairro:</strong>
+                    {{ dados.bairro }}
+                </p>
+
+                <p>
+                    <strong>Cidade:</strong>
+                    {{ dados.localidade }}
+                </p>
+
+                <p>
+                    <strong>Estado:</strong>
+                    {{ dados.uf }}
+                </p>
+
+                {% if dados.complemento %}
+
+                    <p>
+                        <strong>Complemento:</strong>
+                        {{ dados.complemento }}
+                    </p>
+
+                {% endif %}
+
+            </div>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+{% endblock %}
+```

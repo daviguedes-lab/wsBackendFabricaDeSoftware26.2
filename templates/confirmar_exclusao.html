@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+
+{% block title %}Excluir Pizza - Pizzaria{% endblock %}
+
+{% block content %}
+
+<div style="
+    max-width: 550px;
+    margin: 60px auto;
+">
+
+    <div class="card" style="
+        text-align: center;
+        padding: 35px;
+    ">
+
+        <div style="
+            font-size: 55px;
+            margin-bottom: 10px;
+        ">
+            ⚠️
+        </div>
+
+
+        <h2 style="margin-bottom: 10px;">
+            Excluir pizza?
+        </h2>
+
+        <p style="color: #777;">
+            Você está prestes a excluir a seguinte pizza:
+        </p>
+
+
+        {% if pizza.imagem %}
+
+            <img
+                src="{{ pizza.imagem.url }}"
+                alt="{{ pizza.nome }}"
+                style="
+                    width: 180px;
+                    height: 130px;
+                    object-fit: cover;
+                    border-radius: 10px;
+                    margin: 15px 0;
+                "
+            >
+
+        {% else %}
+
+            <div style="
+                width: 180px;
+                height: 130px;
+                margin: 15px auto;
+                background: #eeeeee;
+                border-radius: 10px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 55px;
+            ">
+                🍕
+
+            </div>
+
+        {% endif %}
+
+
+        <h3 style="margin-bottom: 5px;">
+            {{ pizza.nome }}
+        </h3>
+
+        <p style="color: #d32f2f; font-weight: bold;">
+            R$ {{ pizza.preco }}
+        </p>
+
+
+        <p style="
+            color: #888;
+            font-size: 14px;
+            margin: 20px 0 25px;
+        ">
+            Esta ação não poderá ser desfeita.
+        </p>
+
+
+        <form
+            method="POST"
+            style="
+                max-width: none;
+                box-shadow: none;
+                padding: 0;
+                margin: 0;
+                display: flex;
+                justify-content: center;
+                gap: 10px;
+            "
+        >
+
+            {% csrf_token %}
+
+            <a
+                href="{% url 'lista_pizzas' %}"
+                class="btn btn-secondary"
+            >
+                ↩️ Cancelar
+            </a>
+
+            <button
+                type="submit"
+                class="btn btn-danger"
+            >
+                🗑️ Sim, excluir
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}
+

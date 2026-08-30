@@ -1,0 +1,165 @@
+{% extends 'base.html' %}
+
+{% block title %}Pizzas - Pizzaria{% endblock %}
+
+{% block content %}
+
+<div style="
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+">
+
+    <div>
+        <h2 style="margin-bottom: 5px;">
+            🍕 Nossas Pizzas
+        </h2>
+
+        <p style="color: #777; margin-top: 0;">
+            Confira as pizzas cadastradas no sistema.
+        </p>
+    </div>
+
+    <a
+        href="{% url 'nova_pizza' %}"
+        class="btn btn-primary"
+    >
+        ➕ Nova Pizza
+    </a>
+
+</div>
+
+
+{% if pizzas %}
+
+<div class="pizza-grid">
+
+    {% for pizza in pizzas %}
+
+    <div class="pizza-card">
+
+        <!-- IMAGEM -->
+
+        {% if pizza.imagem %}
+
+            <img
+                src="{{ pizza.imagem.url }}"
+                alt="{{ pizza.nome }}"
+            >
+
+        {% else %}
+
+            <div style="
+                height: 200px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background: #eeeeee;
+                font-size: 70px;
+            ">
+                🍕
+            </div>
+
+        {% endif %}
+
+
+        <!-- INFORMAÇÕES -->
+
+        <div class="pizza-info">
+
+            <h3>
+                {{ pizza.nome }}
+            </h3>
+
+
+            {% if pizza.descricao %}
+
+                <p style="color: #777;">
+                    {{ pizza.descricao }}
+                </p>
+
+            {% else %}
+
+                <p style="color: #aaa;">
+                    Sem descrição.
+                </p>
+
+            {% endif %}
+
+
+            <p style="
+                font-size: 14px;
+                color: #777;
+            ">
+                🏷️ {{ pizza.categoria.nome }}
+            </p>
+
+
+            <div class="pizza-price">
+                R$ {{ pizza.preco }}
+            </div>
+
+
+            <!-- BOTÕES -->
+
+            <div class="pizza-actions">
+
+                <a
+                    href="{% url 'editar_pizza' pizza.id %}"
+                    class="btn btn-primary"
+                >
+                    ✏️ Editar
+                </a>
+
+                <a
+                    href="{% url 'excluir_pizza' pizza.id %}"
+                    class="btn btn-danger"
+                >
+                    🗑️ Excluir
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    {% endfor %}
+
+</div>
+
+
+{% else %}
+
+<!-- NENHUMA PIZZA -->
+
+<div class="card" style="text-align: center;">
+
+    <div style="font-size: 60px;">
+        🍕
+    </div>
+
+    <h2>
+        Nenhuma pizza cadastrada
+    </h2>
+
+    <p style="color: #777;">
+        Você ainda não possui nenhuma pizza cadastrada.
+    </p>
+
+    <br>
+
+    <a
+        href="{% url 'nova_pizza' %}"
+        class="btn btn-primary"
+    >
+        ➕ Cadastrar primeira pizza
+    </a>
+
+</div>
+
+{% endif %}
+
+{% endblock %}
+

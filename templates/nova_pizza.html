@@ -1,0 +1,180 @@
+```html
+{% extends 'base.html' %}
+
+{% block title %}Nova Pizza - Pizzaria{% endblock %}
+
+{% block content %}
+
+<h2 class="page-title">🍕 Cadastrar Nova Pizza</h2>
+
+<div class="form-card">
+
+    <form method="POST" enctype="multipart/form-data">
+
+        {% csrf_token %}
+
+        <div class="form-group">
+
+            <label for="imagem">
+                📸 Foto da pizza:
+            </label>
+
+            <input
+                type="file"
+                id="imagem"
+                name="imagem"
+                accept="image/*"
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="nome">
+                Nome da pizza:
+            </label>
+
+            <input
+                type="text"
+                id="nome"
+                name="nome"
+                placeholder="Ex: Calabresa"
+                required
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="descricao">
+                Descrição:
+            </label>
+
+            <textarea
+                id="descricao"
+                name="descricao"
+                placeholder="Descreva os ingredientes da pizza..."
+                required
+            ></textarea>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="preco">
+                Preço:
+            </label>
+
+            <input
+                type="number"
+                id="preco"
+                name="preco"
+                placeholder="Ex: 39.99"
+                step="0.01"
+                min="0"
+                required
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="categoria">
+                🏷️ Categoria existente:
+            </label>
+
+            <select id="categoria" name="categoria">
+
+                <option value="">
+                    Selecione uma categoria
+                </option>
+
+                {% for categoria in categorias %}
+
+                    <option value="{{ categoria.id }}">
+                        {{ categoria.nome }}
+                    </option>
+
+                {% endfor %}
+
+            </select>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+
+                <input
+                    type="checkbox"
+                    id="criar_categoria"
+                    name="criar_categoria"
+                >
+
+                ➕ Criar nova categoria
+
+            </label>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="nome_categoria">
+                Nome da nova categoria:
+            </label>
+
+            <input
+                type="text"
+                id="nome_categoria"
+                name="nome_categoria"
+                placeholder="Ex: Pizzas Doces"
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="descricao_categoria">
+                Descrição da categoria:
+            </label>
+
+            <textarea
+                id="descricao_categoria"
+                name="descricao_categoria"
+                placeholder="Descreva essa categoria..."
+            ></textarea>
+
+        </div>
+
+
+        <div class="actions">
+
+            <button
+                type="submit"
+                class="btn btn-primary"
+            >
+                🍕 Cadastrar Pizza
+            </button>
+
+            <a
+                href="/pizzas/"
+                class="btn btn-secondary"
+            >
+                Cancelar
+            </a>
+
+        </div>
+
+    </form>
+
+</div>
+
+{% endblock %}
+```

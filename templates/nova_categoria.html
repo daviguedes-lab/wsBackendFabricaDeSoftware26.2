@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block title %}Nova Categoria - Pizzaria{% endblock %}
+
+{% block content %}
+
+<div class="form-card">
+
+    <h2>➕ Nova Categoria</h2>
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+        <div class="form-group">
+
+            <label for="nome">Nome da categoria</label>
+
+            <input
+                type="text"
+                id="nome"
+                name="nome"
+                placeholder="Ex: Pizzas Tradicionais"
+                required
+            >
+
+        </div>
+
+        <div class="form-group">
+
+            <label for="descricao">Descrição</label>
+
+            <textarea
+                id="descricao"
+                name="descricao"
+                rows="5"
+                placeholder="Descrição da categoria..."
+                required
+            ></textarea>
+
+        </div>
+
+        <div class="actions">
+
+            <button type="submit" class="btn btn-primary">
+                💾 Salvar Categoria
+            </button>
+
+            <a
+                href="{% url 'lista_categorias' %}"
+                class="btn btn-secondary"
+            >
+                ↩️ Cancelar
+            </a>
+
+        </div>
+
+    </form>
+
+</div>
+
+{% endblock %}

@@ -1,5 +1,36 @@
+# Ambiente virtual
 venv/
+.venv/
+env/
+
+# Python
 __pycache__/
-*.pyc
+*.py[cod]
+*$py.class
+
+# Django
 db.sqlite3
+*.log
+
+# Variaveis de ambiente
 .env
+.env.*
+
+# Arquivos de midia enviados pelos usuarios
+media/
+
+# Arquivos estaticos gerados
+staticfiles/
+
+# IDE
+.vscode/
+.idea/
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
+
+# Testes e cobertura
+.coverage
+htmlcov/
+.pytest_cache/
